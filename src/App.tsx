@@ -1,26 +1,32 @@
+import { Grid } from '@material-ui/core';
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Advertisement from './views/Advertisement';
+import Overview from './views/Overview';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends React.PureComponent {
+  public render(): JSX.Element {
+    return (
+      <BrowserRouter>
+        <Grid container>
+          <Grid xs={12} item>
+            <Navbar />
+          </Grid>
+          <Grid item xs={false} md={2}></Grid>
+          <Grid item xs={12} md={8} style={{ marginTop: 15 }}>
+            <Switch>
+              <Route path="/" exact>
+                <Overview />
+              </Route>
+              <Route path="/category/:category/:id">
+                <Advertisement />
+              </Route>
+            </Switch>
+          </Grid>
+          <Grid item xs={false} md={2}></Grid>
+        </Grid>
+      </BrowserRouter>
+    );
+  }
 }
-
-export default App;
